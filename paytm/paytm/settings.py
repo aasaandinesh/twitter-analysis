@@ -31,7 +31,7 @@ with open(BASE_DIR + "/paytm/paytm/secrets.json") as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.9']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
