@@ -23,6 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'f8snvx2^#w_7j1%a@!dp@ofs4u__pn-=(4yrid1w=z9wf0n14h'
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # api directory
+
+with open(BASE_DIR + "/paytm/paytm/secrets.json") as f:
+    secret = json.loads(f.read())
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -51,6 +56,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+def get_secret(setting, secrets=secret):
+    """
+    Get the secret variable or return explicit exception.
+    :param setting: The Key of the setting
+    :param secrets: The secret.json file
+    """
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {0} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
 
 ROOT_URLCONF = 'paytm.urls'
 
@@ -83,9 +100,9 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "sentimental_analysis",
-        "USER": "postgres",
-        "PASSWORD": "",
-        "HOST": "127.0.0.1",
+        "USER": get_secret('DB_USER'),
+        "PASSWORD": get_secret('DB_PASSWORD'),
+        "HOST": "paytm.cixtj7hefeyo.ap-south-1.rds.amazonaws.com",
         "PORT": "5432",
     }
 }
@@ -126,23 +143,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # api directory
-
-with open(BASE_DIR + "/paytm/paytm/secrets.json") as f:
-    secret = json.loads(f.read())
 
 
-def get_secret(setting, secrets=secret):
-    """
-    Get the secret variable or return explicit exception.
-    :param setting: The Key of the setting
-    :param secrets: The secret.json file
-    """
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {0} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
+
+
 
 CONSUMER_KEY = get_secret('CONSUMER_KEY')
 CONSUMER_SECRET = get_secret('CONSUMER_SECRET')
