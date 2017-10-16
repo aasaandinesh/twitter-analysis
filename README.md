@@ -19,7 +19,7 @@ You can use this app to get info about anything, be it a Movie review,
 In this repository, I will talk about the Architecture of this Android app. The Django part is present at this [link](https://github.com/aasaandinesh/twitter-analysis)
 
 To run the project you would need secrets.json file in this format and keep it in the paytm app
-
+```
 {
   "CONSUMER_KEY" : <Twitter Consumer Key>,
   "CONSUMER_SECRET" : <Twitter Consumer Seret Key>,,
@@ -28,3 +28,4 @@ To run the project you would need secrets.json file in this format and keep it i
   "DB_USER": <Postgres User>,
   "DB_PASSWORD": <Postgres password>
 }
+```
