@@ -29,6 +29,13 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ViewRequestSerializer2(serializers.ModelSerializer):
+
+    class Meta:
+        depth = 2
+        model = ViewRequest
+        fields = '__all__'
+
 class ViewRequestSerializer(serializers.ModelSerializer):
     patient = PrimaryKeyRelatedField(required=False, queryset=Patient.objects)
     business_user = PrimaryKeyRelatedField(required=False, queryset=AbstractBusinessUser.objects)
@@ -37,4 +44,4 @@ class ViewRequestSerializer(serializers.ModelSerializer):
     class Meta:
         depth = 2
         model = ViewRequest
-        fields = '__all__'
+        fields = ['patient', 'business_user', 'allowed']

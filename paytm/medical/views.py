@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from medical.models import Patient, Prescription, MedicalRecord, AbstractBusinessUser, ViewRequest, BaseUser, \
     AbstractUser
 from medical.serializers import PatientSerializer, PrescriptionSerializer, MedicalRecordSerializer, BaseUserSerializer, \
-    ViewRequestSerializer
+    ViewRequestSerializer, ViewRequestSerializer2
 import json
 
 @csrf_exempt
@@ -67,7 +67,7 @@ class MedicalRecordAPIView(mixins.ListModelMixin, generics.GenericAPIView):
 class ViewRequestAPIView(mixins.ListModelMixin, generics.GenericAPIView, mixins.UpdateModelMixin,
                          mixins.CreateModelMixin):
     queryset = ViewRequest.objects.all()
-    serializer_class = ViewRequestSerializer
+    serializer_class = ViewRequestSerializer2
 
     def get(self, request, *args, **kwargs):
         patient_id = request.GET.get('patient_id')
