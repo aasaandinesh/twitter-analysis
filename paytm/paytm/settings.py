@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'paytm',
-    'main'
+    'main',
+    'rest_framework',
+    'medical'
 ]
 
 MIDDLEWARE = [
@@ -102,7 +104,8 @@ DATABASES = {
         "NAME": "sentimental_analysis",
         "USER": get_secret('DB_USER'),
         "PASSWORD": get_secret('DB_PASSWORD'),
-        "HOST": "paytm.cixtj7hefeyo.ap-south-1.rds.amazonaws.com",
+        #"HOST": "paytm.cixtj7hefeyo.ap-south-1.rds.amazonaws.com",
+        "HOST": "127.0.0.1",
         "PORT": "5432",
     }
 }

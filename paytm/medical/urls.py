@@ -16,10 +16,17 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from medical.views import patients_list, PrescriptionAPIView, get_user_data, MedicalRecordAPIView, ViewRequestAPIView, \
+    ViewRequestDetailAPIView
+
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'', include("main.urls", namespace='main')),
-    url(r'', include("medical.urls", namespace='medical')),
-]
+    url(r'^patients/$', patients_list, name='patient_list'),
+    url(r'^prescription/$', PrescriptionAPIView.as_view(), name='prescription'),
+    url(r'^medical_record/$', MedicalRecordAPIView.as_view(), name='medical_record'),
+    url(r'^login/$', get_user_data, name='get_user_data'),
+    url(r'^request/$', ViewRequestAPIView.as_view(), name='view_request'),
+    url(r'^request/(?P<pk>[0-9]+)/$', ViewRequestDetailAPIView.as_view(), name='view_request_detail'),
+
+    ]
 
 
