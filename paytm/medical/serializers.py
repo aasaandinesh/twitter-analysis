@@ -35,5 +35,6 @@ class ViewRequestSerializer(serializers.ModelSerializer):
     allowed = BooleanField(required=True)
 
     class Meta:
+        depth = 1
         model = ViewRequest
         fields = '__all__'
